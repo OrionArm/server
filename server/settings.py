@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'markdown_deux',
 
     'authentication.apps.AuthenticationConfig',
+    'comments',
+    'posts',
 ]
 
 AUTH_USER_MODEL = 'authentication.Account'

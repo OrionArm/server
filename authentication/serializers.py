@@ -1,8 +1,11 @@
 from django.contrib.auth import update_session_auth_hash
 
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .models import Account
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -38,9 +41,36 @@ class AccountSerializer(serializers.ModelSerializer):
         Ensure the passwords are the same
         """
         if data['password']:
-            print("Here")
             if data['password'] != data['confirm_password']:
                 raise serializers.ValidationError(
                     "The passwords have to be the same"
                 )
         return data
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = [
+            'username',
+            'email',
+            'firstname',
+            'lastname',
+            'date_created',
+            'date_modified'
+        ]
+        read_only_fields = ('date_created', 'date_modified')
+
+    def validate(self, data):
+        return data
+
+
+class UserDetailSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'firstname',
+            'lastname',
+        ]

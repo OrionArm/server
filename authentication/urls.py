@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from .views import AuthRegister
+from .views import AuthRegister, UserView
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 urlpatterns = [
@@ -7,4 +7,6 @@ urlpatterns = [
     url(r'^token-refresh/', refresh_jwt_token),
     url(r'^token-verify/', verify_jwt_token),
     url(r'^register/$', AuthRegister.as_view()),
+    url(r'^user-info/$', UserView.as_view()),
+
 ]
