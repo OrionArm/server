@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'markdown_deux',
 
     'authentication.apps.AuthenticationConfig',
-    'comments',
-    'posts',
 ]
 
 AUTH_USER_MODEL = 'authentication.Account'
